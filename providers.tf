@@ -1,5 +1,11 @@
 terraform {
-  required_version = ">= 1.0.0"
+  backend "azurerm" {
+    resource_group_name = "vh-core-infra-dev"
+    storage_account_name = "vhmanagementdev"
+    container_name = "tfstate"
+    key            = "im-infra/vh-im-infra.tfstate"
+  }
+  required_version = ">= 1.0.4"
 }
 
 provider "azurerm" {
