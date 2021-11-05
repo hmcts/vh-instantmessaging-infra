@@ -1,0 +1,8 @@
+.terraform
+*.tfvars
+.idea/
+*terraform.lock.hcl
+**/**/override.tf
+*.tfstate
+*.tfstate*
+*terraform.tfstate
