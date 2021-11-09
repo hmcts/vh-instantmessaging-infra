@@ -9,7 +9,8 @@ parameters:
     type: string
   - name: containerName
     type: string
-
+    
+jobs:
 - job: TerraformPlan
   displayName: TF Plan
   pool:

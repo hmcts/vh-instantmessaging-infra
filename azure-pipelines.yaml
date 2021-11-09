@@ -34,14 +34,11 @@ stages:
         parameters:
           terraformPath: $(Build.SourcesDirectory)
 
-  - stage: Plan
-    displayName: Plan ${parameters.environment}
-    jobs:
-      - template: pipeline/jobs/terraform-plan.yaml
-        parameters:
-          subscription: "Reform-CFT-VH-Dev"
-          environment: dev
-          resourceGroup: vh-core-infra-dev
-          storageAccount: vhmanagementdev
-          containerName: tfstate
+  - template: pipeline/jobs/terraform-plan.yaml
+    parameters:
+      subscription: "Reform-CFT-VH-Dev"
+      environment: dev
+      resourceGroup: vh-core-infra-dev
+      storageAccount: vhmanagementdev
+      containerName: tfstate
       
