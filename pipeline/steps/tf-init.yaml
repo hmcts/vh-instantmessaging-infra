@@ -1,0 +1,38 @@
+parameters:
+  - name: subscription
+    type: string
+
+  - name: environment
+    type: string
+
+  - name: resourceGroup
+    type: string
+
+  - name: location
+    type: string
+    default: uksouth
+
+  - name: storageAccount
+    type: string
+
+  - name: containerName
+    type: string
+
+  - name: workingDirectory
+    type: string
+
+steps:
+- task: TerraformCLI@0
+  displayName: Terraform init
+  inputs:
+    command: init
+    workingDirectory: ${{ parameters.workingDirectory }}
+    backendType: azurerm
+    backendServiceArm: ${{ parameters.subscription }}
+    backendAzureRmResourceGroupName: ${{ parameters.resourceGroup }}
+    backendAzureRmResourceGroupLocation: ${{ parameters.location }}
+    backendAzureRmStorageAccountName: ${{ parameters.storageAccount }}
+    backendAzureRmContainerName: ${{ parameters.containerName }}
+    backendAzureRmKey: iminfra/vh-im-infra.tfstate
+
+- task: UsePythonVersion@0

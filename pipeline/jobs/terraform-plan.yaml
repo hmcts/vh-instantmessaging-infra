@@ -1,0 +1,26 @@
+parameters:
+  - name: subscription
+    type: string
+  - name: environment
+    type: object
+  - name: resourceGroup
+    type: string
+  - name: storageAccount
+    type: string
+  - name: containerName
+    type: string
+
+- job: TerraformPlan
+  displayName: TF Plan
+  pool:
+    vmImage: 'ubuntu-20.04'
+  steps:
+    - template: ../steps/tf-install.yaml
+    - template: ../steps/tf-init.yaml
+      parameters:
+        subscription: ${{ parameters.subscription }}
+        environment: ${{ parameters.environment }}
+        resourceGroup: ${{ variables.resourceGroup }}
+        storageAccount: ${{ variables.storageAccount }}
+        containerName: ${{ variables.containerName }}
+        workingDirectory: ${{ parameters.workingDirectory }}

@@ -1,0 +1,14 @@
+parameters:
+  - name: terraformPath
+    type: string
+
+jobs:
+- job: TerraformValidate
+  displayName: 'Validate Terraform'
+  pool:
+    vmImage: 'ubuntu-20.04'
+  steps:
+  - template: ../steps/tf-install.yaml
+  - template: templates/tests/terraform/allTests.yaml@templates
+    parameters:
+      terraformPath: ${{ parameters.terraformPath }}
