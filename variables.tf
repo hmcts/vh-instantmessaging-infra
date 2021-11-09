@@ -1,5 +1,5 @@
 variable "workspace_to_environment_map" {
-  type = map
+  type = map(any)
   default = {
     AAT     = "aat"
     Demo    = "demo"
@@ -22,15 +22,15 @@ locals {
   app_definitions = {
 
     im-web = {
-      name        = "vh-im-web${local.suffix}"
-      websockets  = false
-      subnet      = "backend"
+      name       = "vh-im-web${local.suffix}"
+      websockets = false
+      subnet     = "backend"
     }
 
     api-web = {
-      name        = "vh-im-api${local.suffix}"
-      websockets  = false
-      subnet      = "backend"
+      name       = "vh-im-api${local.suffix}"
+      websockets = false
+      subnet     = "backend"
     }
   }
 }

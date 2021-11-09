@@ -7,23 +7,23 @@ resource "azurerm_resource_group" "vh-im-infra" {
 data "azurerm_client_config" "current" {}
 
 
-module KeyVault {
+module "KeyVault" {
   source = "./modules/KeyVault"
 
   resource_group_name = azurerm_resource_group.vh-im-infra.name
-  env_suffix  = "${local.suffix}"
+  env_suffix          = local.suffix
 
   depends_on = [
     azurerm_resource_group.vh-im-infra
   ]
 
 }
-module DataServices {
+module "DataServices" {
   source = "./modules/DataServices"
 
   resource_group_name = azurerm_resource_group.vh-im-infra.name
-  env_suffix  = "${local.suffix}"
-  kv_name = "${module.KeyVault.kv_name}"
+  env_suffix          = local.suffix
+  kv_name             = module.KeyVault.kv_name
 
   depends_on = [
     azurerm_resource_group.vh-im-infra,
@@ -31,19 +31,19 @@ module DataServices {
   ]
 }
 
-module AppService {
+module "AppService" {
   source = "./modules/AppService"
 
   apps = {
     for app in keys(local.app_definitions) :
     app => {
-      name  = local.app_definitions[app].name
+      name       = local.app_definitions[app].name
       websockets = local.app_definitions[app].websockets
     }
   }
 
   resource_group_name = azurerm_resource_group.vh-im-infra.name
-  env_suffix  = "${local.suffix}"
+  env_suffix          = local.suffix
 
   depends_on = [
     azurerm_resource_group.vh-im-infra
