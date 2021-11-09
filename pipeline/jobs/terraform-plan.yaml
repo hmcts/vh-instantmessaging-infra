@@ -9,6 +9,9 @@ parameters:
     type: string
   - name: containerName
     type: string
+  - name: workingDirectory
+    type: String
+    default: $(System.DefaultWorkingDirectory)
 
 jobs:
 - job: TerraformPlan
