@@ -10,7 +10,7 @@ parameters:
   - name: containerName
     type: string
   - name: workingDirectory
-    type: String
+    type: string
     default: $(System.DefaultWorkingDirectory)
 
 jobs:
