@@ -25,9 +25,6 @@ parameters:
       - aat
       - preview
 
-variables:
-  - group: 
-
 stages:
 
   - stage: CIBuild
