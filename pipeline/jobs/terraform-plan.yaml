@@ -24,7 +24,7 @@ jobs:
     parameters:
       subscription: ${{ parameters.subscription }}
       environment: ${{ parameters.environment }}
-      resourceGroup: ${{ variables.resourceGroup }}
-      storageAccount: ${{ variables.storageAccount }}
-      containerName: ${{ variables.containerName }}
+      resourceGroup: ${{ parameters.resourceGroup }}
+      storageAccount: ${{ parameters.storageAccount }}
+      containerName: ${{ parameters.containerName }}
       workingDirectory: ${{ parameters.workingDirectory }}
