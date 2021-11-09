@@ -21,7 +21,7 @@ parameters:
   - name: workingDirectory
     type: string
 
-step:
+steps:
 - task: TerraformCLI@0
   displayName: Terraform init
   inputs:
