@@ -1,5 +1,5 @@
 location    = "ukwest"
 
-builtFrom   = "master"
+builtFrom   = "vh-im-infra"
 product     = "vh"
 environment = "dev"

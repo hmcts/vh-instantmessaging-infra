@@ -55,7 +55,7 @@ locals {
 }
 
 module "ctags" {
-  source      = "git::https://github.com/hmcts/terraform-module-common-tags.git?ref=master"
+  source      = "git::https://github.com/hmcts/terraform-module-common-tags.git"
   environment = lower(var.environment)
   product     = var.product
   builtFrom   = var.builtFrom

@@ -33,7 +33,5 @@ steps:
     backendAzureRmResourceGroupLocation: ${{ parameters.location }}
     backendAzureRmStorageAccountName: ${{ parameters.storageAccount }}
     backendAzureRmContainerName: ${{ parameters.containerName }}
-    backendAzureRmKey: iminfra/vh-im-infra.tfstate
-    commandOptions: -reconfigure
 
 - task: UsePythonVersion@0
