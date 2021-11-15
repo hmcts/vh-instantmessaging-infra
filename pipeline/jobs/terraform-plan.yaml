@@ -9,6 +9,8 @@ parameters:
     type: string
   - name: containerName
     type: string
+  - name: stateKey
+    type: string
   - name: workingDirectory
     type: string
     default: $(System.DefaultWorkingDirectory)
