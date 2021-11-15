@@ -30,3 +30,4 @@ jobs:
       storageAccount: ${{ parameters.storageAccount }}
       containerName: ${{ parameters.containerName }}
       workingDirectory: ${{ parameters.workingDirectory }}
+      statekey: ${{ parameters.stateKey }}
