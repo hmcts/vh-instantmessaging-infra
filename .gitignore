@@ -7,3 +7,4 @@
 *.tfstate*
 terraform.tfstate
 *.tfplan
+*/config/dev_local.tfvars
