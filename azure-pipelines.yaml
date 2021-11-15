@@ -30,15 +30,24 @@ variables:
 
 stages:
 
+  - stage: test1
+    displayName: Var Test
+    jobs:
+      - job: testvars
+        displayName: Var Test
+        steps:
+          - bash: echo ${{ variables.storageAccount }}
+
+
   - stage: CIBuild
     displayName: 'Validate Infra'
     jobs: 
       - template: pipeline/jobs/terraform-validate.yaml
         parameters:
           terraformPath: $(Build.SourcesDirectory)
-
+  
   - stage: Plan
-    displayName: Plan ${parameters.environment}
+    displayName: Plan ${{ parameters.environment }}
     jobs:
       - template: pipeline/jobs/terraform-plan.yaml
         parameters:
