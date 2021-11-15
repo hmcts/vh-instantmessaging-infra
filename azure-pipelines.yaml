@@ -25,6 +25,9 @@ parameters:
       - aat
       - preview
 
+variables:
+  - group: vh-im-infra
+
 stages:
 
   - stage: CIBuild
@@ -42,6 +45,8 @@ stages:
           subscription: "Reform-CFT-VH-Dev"
           environment: dev
           resourceGroup: vh-core-infra-dev
-          storageAccount: vhmanagementdev
-          containerName: tfstate
+          storageAccount: ${{ variables.storageAccount }}
+          containerName: ${{ variables.containerName }}
+          stateKey: ${{ variables.stateKey }}
+
       
