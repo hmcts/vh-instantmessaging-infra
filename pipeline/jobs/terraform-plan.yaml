@@ -31,3 +31,20 @@ jobs:
       containerName: ${{ parameters.containerName }}
       workingDirectory: ${{ parameters.workingDirectory }}
       statekey: ${{ parameters.stateKey }}
+
+  - bash: |
+      mkdir '$(Build.SourcesDirectory)/plans'
+    displayName: Create plan directory
+
+  - template: ../steps/tf-plan.yaml
+    parameters:
+      subscription: ${{ parameters.subscription }}
+      tfVariables: ./config/dev.tfvars
+      workingDirectory: ${{ parameters.workingDirectory }}
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish TF Plan'
+    inputs:
+      targetPath: '$(Build.SourcesDirectory)/plans/${{ parameters.outputName }}.tfplan'
+      artifact: '${{ parameters.outputName }}'
+      FileCopyOptions: '/xo'
