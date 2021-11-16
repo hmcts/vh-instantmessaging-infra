@@ -16,4 +16,4 @@ steps:
       command: plan
       workingDirectory: ${{ parameters.workingDirectory }}
       environmentServiceName: ${{ parameters.subscription }}
-      commandOptions: '-var-file=${{ parameters.tfVariables }}''
+      commandOptions: '-var-file=${{ parameters.tfVariables }}'
