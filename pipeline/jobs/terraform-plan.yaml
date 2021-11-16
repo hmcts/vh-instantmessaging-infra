@@ -11,6 +11,8 @@ parameters:
     type: string
   - name: stateKey
     type: string
+  - name: outputName
+    type: string
   - name: workingDirectory
     type: string
     default: $(System.DefaultWorkingDirectory)
