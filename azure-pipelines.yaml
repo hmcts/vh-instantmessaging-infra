@@ -57,5 +57,6 @@ stages:
           storageAccount: $(storageAccount)
           containerName: $(containerName)
           stateKey: $(stateKey)
+          outputName: ${{ parameters.environment }}
 
       
