@@ -38,7 +38,7 @@ jobs:
       mkdir '$(System.DefaultWorkingDirectory)/plans'
       dir_conts=$(ls -ltr $(System.DefaultWorkingDirectory)/plans)
       echo $dir_conts
-      targetPath=$(pwd $(System.DefaultWorkingDirectory)/plans)
+      targetPath=$(pwd '$(System.DefaultWorkingDirectory)/plans')
       echo $targetPath
     displayName: Create plan directory
 
@@ -51,6 +51,6 @@ jobs:
   - task: PublishPipelineArtifact@1
     displayName: 'Publish TF Plan'
     inputs:
-      targetPath: '$((System.DefaultWorkingDirectory)/plans/${{ parameters.outputName }}.tfplan'
+      targetPath: '$(System.DefaultWorkingDirectory)/plans/${{ parameters.outputName }}.tfplan'
       artifact: '${{ parameters.outputName }}'
       FileCopyOptions: '/xo'
