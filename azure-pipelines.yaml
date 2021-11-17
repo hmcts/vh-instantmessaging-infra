@@ -30,13 +30,13 @@ variables:
 
 stages:
 
-  - stage: test1
-    displayName: Var Test
-    jobs:
-      - job: testvars
-        displayName: Var Test
-        steps:
-          - bash: echo "our storage account is $(storageAccount)"
+  #- stage: test1
+  #  displayName: Var Test
+  #  jobs:
+  #    - job: testvars
+  #      displayName: Var Test
+  #      steps:
+  #        - bash: echo "our storage account is $(storageAccount)"
 
 
   - stage: CIBuild
