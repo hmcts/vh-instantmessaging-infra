@@ -36,8 +36,10 @@ jobs:
 
   - bash: |
       mkdir '$(Build.SourcesDirectory)/plans'
-      dir_conts=$(ls -ltr $(Build.SourcesDirectory))
+      dir_conts=$(ls -ltr $(Build.SourcesDirectory)/plans)
       echo $dir_conts
+      targetPath=$(pwd $(Build.SourcesDirectory)/plans)
+      echo $targetPath
     displayName: Create plan directory
 
   - template: ../steps/tf-plan.yaml
