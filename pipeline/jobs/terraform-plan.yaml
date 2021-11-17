@@ -35,7 +35,7 @@ jobs:
       statekey: ${{ parameters.stateKey }}
 
   - bash: |
-      mkdir '$(System.DefaultWorkingDirectory)/plans'
+      mkdir plans
       dir_conts=$(ls -ltr $(System.DefaultWorkingDirectory)/plans)
       echo $dir_conts
       targetPath=$(pwd '$(System.DefaultWorkingDirectory)/plans')
