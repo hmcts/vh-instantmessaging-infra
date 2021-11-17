@@ -35,10 +35,10 @@ jobs:
       statekey: ${{ parameters.stateKey }}
 
   - bash: |
-      mkdir '$(Build.SourcesDirectory)/plans'
-      dir_conts=$(ls -ltr $(Build.SourcesDirectory)/plans)
+      mkdir '$((System.DefaultWorkingDirectory)/plans'
+      dir_conts=$(ls -ltr $((System.DefaultWorkingDirectory)/plans)
       echo $dir_conts
-      targetPath=$(pwd $(Build.SourcesDirectory)/plans)
+      targetPath=$(pwd $((System.DefaultWorkingDirectory)/plans)
       echo $targetPath
     displayName: Create plan directory
 
@@ -51,6 +51,6 @@ jobs:
   - task: PublishPipelineArtifact@1
     displayName: 'Publish TF Plan'
     inputs:
-      targetPath: '$(Build.SourcesDirectory)/plans/${{ parameters.outputName }}.tfplan'
+      targetPath: '$((System.DefaultWorkingDirectory)/plans/${{ parameters.outputName }}.tfplan'
       artifact: '${{ parameters.outputName }}'
       FileCopyOptions: '/xo'
