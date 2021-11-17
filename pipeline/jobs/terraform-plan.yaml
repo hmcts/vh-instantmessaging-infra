@@ -36,9 +36,9 @@ jobs:
 
   - bash: |
       mkdir '$(System.DefaultWorkingDirectory)/plans'
-      dir_conts=$(ls -ltr $((System.DefaultWorkingDirectory)/plans)
+      dir_conts=$(ls -ltr $(System.DefaultWorkingDirectory)/plans)
       echo $dir_conts
-      targetPath=$(pwd $((System.DefaultWorkingDirectory)/plans)
+      targetPath=$(pwd $(System.DefaultWorkingDirectory)/plans)
       echo $targetPath
     displayName: Create plan directory
 
