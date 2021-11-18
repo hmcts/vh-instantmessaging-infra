@@ -51,6 +51,6 @@ jobs:
   - task: PublishPipelineArtifact@1
     displayName: 'Publish TF Plan'
     inputs:
-      targetPath: '$(System.DefaultWorkingDirectory)/plans/${{ parameters.outputName }}.tfplan'
+      targetPath: '$(System.DefaultWorkingDirectory)/plans/'
       artifact: '${{ parameters.outputName }}'
       FileCopyOptions: '/xo'
