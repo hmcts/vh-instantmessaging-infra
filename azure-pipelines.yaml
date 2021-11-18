@@ -53,6 +53,7 @@ stages:
         parameters:
           subscription: "Reform-CFT-VH-Dev"
           environment: dev
+          location: uksouth
           resourceGroup: vh-core-infra-dev
           storageAccount: $(storageAccount)
           containerName: $(containerName)
@@ -77,6 +78,7 @@ stages:
         parameters:
           subscription: "Reform-CFT-VH-Dev"
           dependsOn: Wait
+          location: uksouth
           environment: ${{ parameters.environment }}
           resourceGroup: vh-core-infra-dev
           storageAccount: $(storageAccount)
