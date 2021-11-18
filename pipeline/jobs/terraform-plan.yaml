@@ -16,6 +16,8 @@ parameters:
   - name: workingDirectory
     type: string
     default: $(System.DefaultWorkingDirectory)
+  - name: location
+    type: string
 
 jobs:
 - job: TerraformPlan
