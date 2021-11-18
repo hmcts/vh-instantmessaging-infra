@@ -47,9 +47,10 @@ parameters:
 
 jobs:
 - job: Terraform
-  displayName: ${{ parameters.displayName }}
+  displayName: TF Apply
   pool:
     vmImage: 'ubuntu-20.04'
+    
   steps:
 
   - download: current
