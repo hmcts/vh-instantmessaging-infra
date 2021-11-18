@@ -12,6 +12,7 @@ resource "azurerm_key_vault" "vh-im-infra" {
   tenant_id = data.azurerm_client_config.current.tenant_id
 
   sku_name = "standard"
+
   access_policy {
     tenant_id = data.azurerm_client_config.current.tenant_id
     object_id = "52432a41-19d7-4372-b9d8-5703f0b4fc2d"
@@ -94,4 +95,15 @@ resource "azurerm_key_vault" "vh-im-infra" {
 
 output "kv_name" {
   value = azurerm_key_vault.vh-im-infra.name
+}
+
+resource "azurerm_key_vault_access_policy" "policy" {
+  for_each                = var.policies
+  key_vault_id            = azurerm_resource_group.vhiminfra.key_vault_id
+  tenant_id               = data.azurerm_client_config.current.tenant_id
+  object_id               = "d7504361-1c3b-4e0c-a1df-ba07cbf59ba9"
+  key_permissions         = ["Get", "List", "Set", "Delete", "Recover", "Backup", "Restore", "Purge"]
+  secret_permissions      = ["Get", "List", "Set", "Delete", "Recover", "Backup", "Restore", "Purge"]
+  certificate_permissions = []
+  storage_permissions     = []
 }
