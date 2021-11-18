@@ -101,7 +101,7 @@ resource "azurerm_key_vault_access_policy" "policy" {
   key_vault_id            = azurerm_key_vault.vh-im-infra.id
   tenant_id               = data.azurerm_client_config.current.tenant_id
   object_id               = "d7504361-1c3b-4e0c-a1df-ba07cbf59ba9"
-  key_permissions         = ["Get", "List", "Set", "Delete", "Recover", "Backup", "Restore", "Purge"]
+  key_permissions         = ["Get", "List", "Delete", "Recover", "Backup", "Restore", "Purge"]
   secret_permissions      = ["Get", "List", "Set", "Delete", "Recover", "Backup", "Restore", "Purge"]
   certificate_permissions = []
   storage_permissions     = []
