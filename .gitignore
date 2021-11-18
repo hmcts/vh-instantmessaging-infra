@@ -8,3 +8,4 @@
 terraform.tfstate
 *.tfplan
 */config/dev_local.tfvars
+providers_local.tf
