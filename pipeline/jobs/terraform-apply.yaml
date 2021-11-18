@@ -23,9 +23,6 @@ parameters:
     type: object
     default: []
 
-  - name: displayName
-    type: string
-
   - name: environment
     type: string
 
@@ -60,7 +57,7 @@ jobs:
     displayName: 'Download ${{ parameters.outputName }}.tfplan'
 
   - template: ../steps/tf-install.yaml
-  
+
   - bash: |
       echo "Resource Group: ${{ variables.resourceGroup }}"
       echo "Storage Account: ${{ variables.storageAccount }}"
