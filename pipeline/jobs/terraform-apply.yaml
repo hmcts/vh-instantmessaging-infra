@@ -50,7 +50,7 @@ jobs:
   displayName: TF Apply
   pool:
     vmImage: 'ubuntu-20.04'
-
+    
   steps:
 
   - download: current
@@ -79,4 +79,4 @@ jobs:
       subscription: ${{ parameters.subscription }}
       environment: ${{ parameters.environment }}
       workingDirectory: ${{ parameters.workingDirectory }}
-      planLocation: '$(Pipeline.Workspace)/${{parameters.outputName}}.tfplan'
+      planLocation: '$(Pipeline.Workspace)/${{parameters.outputName}}/${{parameters.outputName}}.tfplan'
