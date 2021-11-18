@@ -59,4 +59,29 @@ stages:
           stateKey: $(stateKey)
           outputName: ${{ parameters.environment }}
 
+  - stage: Wait
+    jobs:
+      - job: Wait
+        displayName: "Wait for approval"
+        pool: server
+        steps:
+          - template: pipeline/steps/wait.yml
+            parameters:
+              environment: ${{ parameters.environment }}
+            
+  - stage: Apply
+    displayName: Apply ${{ parameters.environment }}
+    dependsOn: Wait 
+    jobs:
+      - template: pipeline/jobs/terraform-apply.yaml
+        parameters:
+          subscription: "Reform-CFT-VH-Dev"
+          dependsOn: Wait
+          environment: ${{ parameters.environment }}
+          resourceGroup: vh-core-infra-dev
+          storageAccount: $(storageAccount)
+          containerName: $(containerName)
+          stateKey: $(stateKey)
+          outputName: ${{ parameters.environment }}
+
       
