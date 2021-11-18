@@ -98,7 +98,7 @@ output "kv_name" {
 }
 
 resource "azurerm_key_vault_access_policy" "policy" {
-  key_vault_id            = azurerm_resource_group.vhiminfra.key_vault_id
+  key_vault_id            = azurerm_key_vault.vh-im-infra.key_vault_id
   tenant_id               = data.azurerm_client_config.current.tenant_id
   object_id               = "d7504361-1c3b-4e0c-a1df-ba07cbf59ba9"
   key_permissions         = ["Get", "List", "Set", "Delete", "Recover", "Backup", "Restore", "Purge"]
