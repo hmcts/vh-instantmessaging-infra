@@ -85,7 +85,7 @@ resource "azurerm_key_vault" "vh-im-infra" {
     ]
   }
   network_acls {
-    default_action  = "Deny"
+    default_action  = "Allow"
     bypass          = "AzureServices"
     ip_rules        = [ "37.228.204.188" ]
   }
