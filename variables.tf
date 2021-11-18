@@ -14,7 +14,7 @@ variable "workspace_to_environment_map" {
 }
 
 locals {
-  environment   = lookup(var.workspace_to_environment_map, terraform.workspace, "test2")
+  environment   = lookup(var.workspace_to_environment_map, terraform.workspace, "dev")
   suffix        = "-${local.environment}"
   common_prefix = "im-infra"
   std_prefix    = "vh-${local.common_prefix}"
