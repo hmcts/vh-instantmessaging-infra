@@ -1,11 +1,11 @@
 parameters:
   - name: subscription
     type: string
-
   - name: workingDirectory
     type: string
-
   - name: tfVariables
+    type: string
+  - name: environment
     type: string
 
 steps:
@@ -16,4 +16,4 @@ steps:
       command: plan
       workingDirectory: ${{ parameters.workingDirectory }}
       environmentServiceName: ${{ parameters.subscription }}
-      commandOptions: '-var-file=${{ parameters.tfVariables }} -out=${{ parameters.workingDirectory }}/plans/dev.tfplan'
+      commandOptions: '-var-file=${{ parameters.tfVariables }} -out=${{ parameters.workingDirectory }}/plans/${{ parameters.environment }}.tfplan'

@@ -52,8 +52,8 @@ stages:
       - template: pipeline/jobs/terraform-plan.yaml
         parameters:
           subscription: "Reform-CFT-VH-Dev"
-          environment: dev
-          location: uksouth
+          environment: ${{ parameters.environment }}
+          location: ukwest
           resourceGroup: vh-core-infra-dev
           storageAccount: $(storageAccount)
           containerName: $(containerName)

@@ -1,3 +1,7 @@
+locals {
+   env = var.environment == "test2" ? "test" : var.environment
+}
+
 resource "azurerm_resource_group" "vh-im-infra" {
   name     = "${local.std_prefix}${local.suffix}"
   location = var.location
@@ -56,7 +60,7 @@ locals {
 
 module "ctags" {
   source      = "git::https://github.com/hmcts/terraform-module-common-tags.git"
-  environment = lower(var.environment)
+  environment = lower(local.env)
   product     = var.product
   builtFrom   = var.builtFrom
 }

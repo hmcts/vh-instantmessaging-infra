@@ -47,7 +47,8 @@ jobs:
   - template: ../steps/tf-plan.yaml
     parameters:
       subscription: ${{ parameters.subscription }}
-      tfVariables: "./config/dev.tfvars"
+      environment: ${{ parameters.environment }}
+      tfVariables: "./config/${{ parameters.environment }}.tfvars"
       workingDirectory: ${{ parameters.workingDirectory }}
 
   - task: PublishPipelineArtifact@1

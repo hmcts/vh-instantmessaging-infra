@@ -1,5 +1,4 @@
 .terraform
-*.tfvars
 .idea/
 *terraform.lock.hcl
 **/**/override.tf
@@ -7,5 +6,6 @@
 *.tfstate*
 terraform.tfstate
 *.tfplan
-*/config/dev_local.tfvars
+/config/dev_local.tfvars
 providers_local.tf
+providers_local.not
