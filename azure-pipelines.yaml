@@ -57,7 +57,7 @@ stages:
           resourceGroup: vh-core-infra-dev
           storageAccount: $(storageAccount)
           containerName: $(containerName)
-          stateKey: $(stateKey)${{ parameters.environment }}.tfstate
+          stateKey: $(stateKey)-${{ parameters.environment }}.tfstate
           outputName: ${{ parameters.environment }}
 
   - stage: Wait
