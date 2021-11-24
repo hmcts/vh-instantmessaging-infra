@@ -13,77 +13,7 @@ resource "azurerm_key_vault" "vh-im-infra" {
 
   sku_name = "standard"
 
-  access_policy {
-    tenant_id = data.azurerm_client_config.current.tenant_id
-    object_id = "52432a41-19d7-4372-b9d8-5703f0b4fc2d"
-
-
-     certificate_permissions = [
-      "backup",
-      "create",
-      "delete",
-      "deleteissuers",
-      "get",
-      "getissuers",
-      "import",
-      "list",
-      "listissuers",
-      "managecontacts",
-      "manageissuers",
-      "purge",
-      "recover",
-      "restore",
-      "setissuers",
-      "update"
-    ]
-
-    key_permissions = [
-      "backup",
-      "create",
-      "decrypt",
-      "delete",
-      "encrypt",
-      "get",
-      "import",
-      "list",
-      "purge",
-      "recover",
-      "restore",
-      "sign",
-      "unwrapKey",
-      "update",
-      "verify",
-      "wrapKey"
-    ]
-
-    secret_permissions = [
-      "backup",
-      "delete",
-      "get",
-      "list",
-      "purge",
-      "recover",
-      "restore",
-      "set"
-    ]
-
-    storage_permissions = [
-      "backup",
-      "delete",
-      "deletesas",
-      "get",
-      "getsas",
-      "list",
-      "listsas",
-      "purge",
-      "recover",
-      "regeneratekey",
-      "restore",
-      "set",
-      "setsas",
-      "update"
-    ]
-  }
+  
   network_acls {
     default_action  = "Allow"
     bypass          = "AzureServices"
@@ -98,11 +28,12 @@ output "kv_name" {
 }
 
 resource "azurerm_key_vault_access_policy" "policy" {
+  for_each                = var.policies
   key_vault_id            = azurerm_key_vault.vh-im-infra.id
   tenant_id               = data.azurerm_client_config.current.tenant_id
-  object_id               = "d7504361-1c3b-4e0c-a1df-ba07cbf59ba9"
-  key_permissions         = ["Get", "List", "Delete", "Recover", "Backup", "Restore", "Purge"]
-  secret_permissions      = ["Get", "List", "Set", "Delete", "Recover", "Backup", "Restore", "Purge"]
-  certificate_permissions = []
-  storage_permissions     = []
+  object_id               = lookup(each.value, "object_id")
+  key_permissions         = lookup(each.value, "key_permissions")
+  secret_permissions      = lookup(each.value, "secret_permissions")
+  certificate_permissions = lookup(each.value, "certificate_permissions")
+  storage_permissions     = lookup(each.value, "storage_permissions")
 }

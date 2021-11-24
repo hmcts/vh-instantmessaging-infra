@@ -17,6 +17,25 @@ module "KeyVault" {
   resource_group_name = azurerm_resource_group.vh-im-infra.name
   env_suffix          = local.suffix
 
+  policies = {
+    "devops-agent" = {
+      tenant_id               = data.azurerm_client_config.current.tenant_id
+      object_id               = "d7504361-1c3b-4e0c-a1df-ba07cbf59ba9"
+      key_permissions         = ["Get", "List", "Delete", "Recover", "Backup", "Restore", "Purge"]
+      secret_permissions      = ["Get", "List", "Set", "Delete", "Recover", "Backup", "Restore", "Purge"]
+      certificate_permissions = []
+      storage_permissions     = []
+    },
+    "chris_c" = {
+      tenant_id               = data.azurerm_client_config.current.tenant_id
+      object_id               = "52432a41-19d7-4372-b9d8-5703f0b4fc2d"
+      key_permissions         = ["Get", "List", "Delete", "Recover", "Backup", "Restore", "Purge"]
+      secret_permissions      = ["Get", "List", "Set", "Delete", "Recover", "Backup", "Restore", "Purge"]
+      certificate_permissions = ["Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set"]
+      storage_permissions     = []
+    }
+  }
+
   depends_on = [
     azurerm_resource_group.vh-im-infra
   ]
