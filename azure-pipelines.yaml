@@ -1,0 +1,89 @@
+trigger:
+  - master
+pr:
+  - none
+
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      name: hmcts/azure-devops-templates
+      ref: refs/heads/master
+      endpoint: hmcts
+
+parameters:
+  - name: environment
+    displayName: Environment to Deploy (sbox default)
+    type: string
+    default: sandbox
+    values:
+      - dev
+      - sandbox
+      - test1
+      - test2
+      - demo
+      - aat
+      - preview
+
+variables:
+  - group: vh-im-infra
+
+stages:
+
+  #- stage: test1
+  #  displayName: Var Test
+  #  jobs:
+  #    - job: testvars
+  #      displayName: Var Test
+  #      steps:
+  #        - bash: echo "our storage account is $(storageAccount)"
+
+
+  - stage: CIBuild
+    displayName: 'Validate Infra'
+    jobs: 
+      - template: pipeline/jobs/terraform-validate.yaml
+        parameters:
+          terraformPath: $(Build.SourcesDirectory)
+  
+  - stage: Plan
+    displayName: Plan ${{ parameters.environment }}
+    jobs:
+      - template: pipeline/jobs/terraform-plan.yaml
+        parameters:
+          subscription: "Reform-CFT-VH-Dev"
+          environment: ${{ parameters.environment }}
+          location: ukwest
+          resourceGroup: vh-core-infra-dev
+          storageAccount: $(storageAccount)
+          containerName: $(containerName)
+          stateKey: $(stateKey)-${{ parameters.environment }}.tfstate
+          outputName: ${{ parameters.environment }}
+
+  - stage: Wait
+    jobs:
+      - job: Wait
+        displayName: "Wait for approval"
+        pool: server
+        steps:
+          - template: pipeline/steps/wait.yaml
+            parameters:
+              environment: ${{ parameters.environment }}
+            
+  - stage: Apply
+    displayName: Apply ${{ parameters.environment }}
+    dependsOn: Wait 
+    jobs:
+      - template: pipeline/jobs/terraform-apply.yaml
+        parameters:
+          subscription: "Reform-CFT-VH-Dev"
+          dependsOn: Wait
+          location: uksouth
+          environment: ${{ parameters.environment }}
+          resourceGroup: vh-core-infra-dev
+          storageAccount: $(storageAccount)
+          containerName: $(containerName)
+          stateKey: $(stateKey)
+          outputName: ${{ parameters.environment }}
+
+      

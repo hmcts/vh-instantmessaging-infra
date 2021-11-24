@@ -1,0 +1,21 @@
+parameters:
+  - name: environment
+    type: object
+  - name: service
+    type: object
+
+variables: 
+  - name: planOutputName
+    value: 'vh-im-infra_${{ parameters.environment.name }}'
+  - name: storageAccount
+    value: 'vhmanagementdev'
+  - name: resourceGroupName
+    value: 'vh-core-infra-dev'
+  - name: containerName
+    value: 'tfstate'
+  - name: terraformVersion
+    value: ${{ parameters.service.terraformVersion }}
+  - name: builtFrom
+    value: hmcts/vh-instantmessaging-infra
+  - name: product
+    value: vh

@@ -1,0 +1,59 @@
+parameters:
+  - name: subscription
+    type: string
+  - name: environment
+    type: object
+  - name: resourceGroup
+    type: string
+  - name: storageAccount
+    type: string
+  - name: containerName
+    type: string
+  - name: stateKey
+    type: string
+  - name: outputName
+    type: string
+  - name: workingDirectory
+    type: string
+    default: $(System.DefaultWorkingDirectory)
+  - name: location
+    type: string
+
+jobs:
+- job: TerraformPlan
+  displayName: TF Plan
+  pool:
+    vmImage: 'ubuntu-20.04'
+  steps:
+  - template: ../steps/tf-install.yaml
+  - template: ../steps/tf-init.yaml
+    parameters:
+      subscription: ${{ parameters.subscription }}
+      environment: ${{ parameters.environment }}
+      resourceGroup: ${{ parameters.resourceGroup }}
+      storageAccount: ${{ parameters.storageAccount }}
+      containerName: ${{ parameters.containerName }}
+      workingDirectory: ${{ parameters.workingDirectory }}
+      statekey: ${{ parameters.stateKey }}
+
+  - bash: |
+      mkdir '$(System.DefaultWorkingDirectory)/plans'
+      dir_conts=$(ls -ltr $(System.DefaultWorkingDirectory)/plans)
+      echo $dir_conts
+      targetPath=$(pwd '$(System.DefaultWorkingDirectory)/plans')
+      echo $targetPath
+    displayName: Create plan directory
+
+  - template: ../steps/tf-plan.yaml
+    parameters:
+      subscription: ${{ parameters.subscription }}
+      environment: ${{ parameters.environment }}
+      tfVariables: "./config/${{ parameters.environment }}.tfvars"
+      workingDirectory: ${{ parameters.workingDirectory }}
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish TF Plan'
+    inputs:
+      targetPath: '$(System.DefaultWorkingDirectory)/plans/'
+      artifact: '${{ parameters.outputName }}'
+      FileCopyOptions: '/xo'

@@ -1,0 +1,42 @@
+parameters:
+  - name: subscription
+    type: string
+
+  - name: environment
+    type: string
+
+  - name: resourceGroup
+    type: string
+
+  - name: location
+    type: string
+    default: uksouth
+
+  - name: storageAccount
+    type: string
+
+  - name: containerName
+    type: string
+
+  - name: stateKey
+    type: string
+
+  - name: workingDirectory
+    type: string
+
+steps:
+- task: TerraformCLI@0
+  displayName: Terraform init
+  inputs:
+    command: init
+    commandOptions: -reconfigure
+    workingDirectory: ${{ parameters.workingDirectory }}
+    backendType: azurerm
+    backendServiceArm: ${{ parameters.subscription }}
+    backendAzureRmResourceGroupName: ${{ parameters.resourceGroup }}
+    backendAzureRmResourceGroupLocation: ${{ parameters.location }}
+    backendAzureRmStorageAccountName: ${{ parameters.storageAccount }}
+    backendAzureRmContainerName: ${{ parameters.containerName }}
+    backendAzureRmKey: ${{ parameters.stateKey }} 
+
+- task: UsePythonVersion@0

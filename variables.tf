@@ -1,5 +1,5 @@
 variable "workspace_to_environment_map" {
-  type = map
+  type = map(any)
   default = {
     AAT     = "aat"
     Demo    = "demo"
@@ -14,7 +14,7 @@ variable "workspace_to_environment_map" {
 }
 
 locals {
-  environment   = lookup(var.workspace_to_environment_map, terraform.workspace, "dev")
+  environment   = var.environment
   suffix        = "-${local.environment}"
   common_prefix = "im-infra"
   std_prefix    = "vh-${local.common_prefix}"
@@ -22,15 +22,15 @@ locals {
   app_definitions = {
 
     im-web = {
-      name        = "vh-im-web${local.suffix}"
-      websockets  = false
-      subnet      = "backend"
+      name       = "vh-im-web${local.suffix}"
+      websockets = false
+      subnet     = "backend"
     }
 
     api-web = {
-      name        = "vh-im-api${local.suffix}"
-      websockets  = false
-      subnet      = "backend"
+      name       = "vh-im-api${local.suffix}"
+      websockets = false
+      subnet     = "backend"
     }
   }
 }

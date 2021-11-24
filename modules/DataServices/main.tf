@@ -9,7 +9,7 @@ data "azurerm_key_vault" "vh-im-infra" {
 
 resource "azurerm_user_assigned_identity" "sqluser" {
 
-  name = "vh-im-infra-${var.env_suffix}-sqluser"
+  name = "vh-im-infra${var.env_suffix}-sqluser"
   resource_group_name = data.azurerm_resource_group.vh-im-infra.name
   location            = data.azurerm_resource_group.vh-im-infra.location
 }

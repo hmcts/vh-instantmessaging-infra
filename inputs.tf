@@ -1,20 +1,20 @@
 variable "tags" {
-  type = map(any)
+  type    = map(any)
   default = {}
 }
 
 variable "location" {
-  type    = string
+  type = string
 }
 
 variable "environment" {
-    type    = string
-} 
+  type = string
+}
 
 variable "product" {
-    type    = string
-} 
+  type = string
+}
 
 variable "builtFrom" {
-    type    = string
+  type = string
 }
