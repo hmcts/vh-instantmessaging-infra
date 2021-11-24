@@ -31,7 +31,7 @@ module "KeyVault" {
       object_id               = "52432a41-19d7-4372-b9d8-5703f0b4fc2d"
       key_permissions         = ["Get", "List", "Delete", "Recover", "Backup", "Restore", "Purge"]
       secret_permissions      = ["Get", "List", "Set", "Delete", "Recover", "Backup", "Restore", "Purge"]
-      certificate_permissions = ["Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set"]
+      certificate_permissions = ["Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore"]
       storage_permissions     = []
     }
   }
