@@ -1,5 +1,5 @@
 locals {
-  env = var.environment == "test2" ? "test" : var.environment
+  env = var.environment == "test1" ? "test" : var.environment == "test2" ? "test" : var.environment
 }
 
 resource "azurerm_resource_group" "vh-im-infra" {
